@@ -32,11 +32,11 @@ func (blockchain *Blockchain) Print() {
 
 	for {
 		block := blockchain.Blocks[currentHash]
-		fmt.Printf("Hash: 0x%x\nPrevHash: 0x%x\nTimestamp: %s\nNonce: %d\nData: %s\n\n", block.Hash, block.PrevHash, time.Unix(block.Timestamp, 0).String(), block.Nonce, block.Data)
+		fmt.Printf("Hash: 0x%x\nPrevHash: 0x%x\nTimestamp: %s\nNonce: %d\nTransactions: %x\n\n", block.Hash, block.PrevHash, time.Unix(block.Timestamp, 0).String(), block.Nonce, block.TransactionsHash())
 
 		if block.PrevHash == [32]byte{} {
-			// genesisblock, lets leave
-			break
+			// genesisblock, lets get out of here
+			return
 		}
 
 		currentHash = block.PrevHash
